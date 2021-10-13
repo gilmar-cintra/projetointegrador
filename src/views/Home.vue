@@ -34,7 +34,7 @@
       <v-row>
         <LojaCard v-for="n in 10" :key="n" />
       </v-row>
-      <br />$
+      <br />
     </v-container>
   </div>
 </template>
