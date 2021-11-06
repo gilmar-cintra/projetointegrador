@@ -32,7 +32,12 @@
       </v-card>
       <br /><br />
       <v-row>
-        <LojaCard v-for="n in 10" :key="n" />
+        <LojaCard
+          v-for="(loja, i) in lojasCadastradas"
+          :key="i"
+          :id="i"
+          :loja="loja"
+        />
       </v-row>
       <br />
     </v-container>
@@ -42,10 +47,19 @@
 <script>
 // @ is an alias to /src
 import LojaCard from "../components/LojaCard.vue";
+import { lojas } from "../utils/dados.ts";
 export default {
   name: "Home",
+  data() {
+    return {
+      lojasCadastradas: [],
+    };
+  },
   components: {
     LojaCard,
+  },
+  mounted() {
+    this.lojasCadastradas = lojas;
   },
 };
 </script>

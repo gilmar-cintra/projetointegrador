@@ -11,28 +11,32 @@
     <v-container>
       <v-row>
         <v-col>
-          <h1>Loja de Teste</h1>
+          <h1>{{ loja.nome }}</h1>
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <v-img
-            width="100%"
-            src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-          ></v-img
-          ><br />
-          <v-chip outlined dark color="#F76F72"><b>Padaria</b></v-chip>
+          <v-img width="100%" :src="loja.imagem"></v-img><br />
+          <v-chip outlined dark color="#F76F72"
+            ><b>{{ loja.categoria }}</b></v-chip
+          >
         </v-col>
       </v-row>
       <v-row>
-        <v-col> <b>Endereço: </b> Rua do Exemplo, 49 - São Paulo - SP </v-col>
+        <v-col> <b>Endereço: </b> {{ loja.endereco }} </v-col>
       </v-row>
       <v-row>
-        <v-col> <b>Telefone: </b> (11) 91111-2222</v-col>
+        <v-col> <b>Telefone: </b> {{ loja.telefone }}</v-col>
       </v-row>
       <v-row>
         <v-col>
-          <v-btn color="#25D366" width="150px" dark>WhatsApp</v-btn>
+          <v-btn
+            color="#25D366"
+            width="150px"
+            :href="`https://wa.me/${loja.telefone}`"
+            dark
+            >WhatsApp</v-btn
+          >
         </v-col>
       </v-row>
       <v-row>
@@ -46,11 +50,25 @@
 </template>
 
 <script>
+import { lojas } from "../utils/dados.ts";
+
 export default {
   name: "About",
+  data() {
+    return {
+      lojasCadastradas: [],
+    };
+  },
+
   methods: {
     voltar() {
       this.$router.go(-1);
+    },
+  },
+
+  computed: {
+    loja() {
+      return lojas.find((x) => x.id == this.$route.params.id);
     },
   },
 };
